@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>ch.dvbern.oss.maven</groupId>
+		<artifactId>parent-minimal</artifactId>
+		<version>3.0.0</version>
+	</parent>
+
+	<groupId>ch.dvbern.oss.commons-i18n-l10n</groupId>
+	<artifactId>dvb-commons-i18n-l10n-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<!-- *********************** Release HowTo *********************************************** -->
+	<!-- * ./mvnw -B jgitflow:release-start jgitflow:release-finish                          * -->
+	<!-- * Then check that everything is pushed                                              * -->
+	<!-- * and start the github action on branch "main":                                     * -->
+	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml * -->
+	<!-- ************************************************************************************* -->
+
+	<!-- <editor-fold desc="properties" defaultstate="collapsed"> -->
+	<properties>
+		<slf4j.version>2.0.11</slf4j.version>
+		<spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
+		<junit.jupiter.version>5.10.0</junit.jupiter.version>
+		<mockito-junit-jupiter.version>5.7.0</mockito-junit-jupiter.version>
+
+		<spotbugs-maven-plugin.version>4.8.1.0</spotbugs-maven-plugin.version>
+		<maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
+		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+		<maven-checkstyle.version>10.12.7</maven-checkstyle.version>
+		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+
+		<!-- ! keep in sync with .mvn/maven-wrapper.properties ! -->
+		<maven-enforcer-plugin.requireMavenVersion.version>[3.9.5,)</maven-enforcer-plugin.requireMavenVersion.version>
+		<maven-enforcer-plugin.requireJavaVersion.version>${maven-compiler-plugin.javaversion}</maven-enforcer-plugin.requireJavaVersion.version>
+	</properties>
+	<!-- </editor-fold> -->
+
+	<description>Helper methods to facilitate i18n and l10n concerns.</description>
+	<url>https://github.com/dvbern/commons-i18n-l10n</url>
+
+	<!-- <editor-fold desc="organization" defaultstate="collapsed"> -->
+	<organization>
+		<name>DV Bern AG</name>
+		<url>https://www.dvbern.ch</url>
+	</organization>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="licenses" defaultstate="collapsed"> -->
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="modules" defaultstate="collapsed"> -->
+	<modules>
+		<module>api</module>
+		<module>assertions</module>
+	</modules>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="scm" defaultstate="collapsed"> -->
+	<scm>
+		<connection>scm:git:git://github.com/dvbern/commons-i18n-l10n.git</connection>
+		<developerConnection>scm:git:ssh://github.com:dvbern/commons-i18n-l10n.git</developerConnection>
+		<url>https://github.com/dvbern/commons-i18n-l10n.git</url>
+	</scm>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="issueManagement" defaultstate="collapsed"> -->
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/dvbern/commons-i18n-l10n/issues</url>
+	</issueManagement>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="ciManagement" defaultstate="collapsed"> -->
+	<ciManagement>
+		<system>GitHub Actions</system>
+		<url>https://github.com/dvbern/commons-i18n-l10n/actions</url>
+	</ciManagement>
+	<!-- </editor-fold> -->
+
+	<!-- <editor-fold desc="dependencyManagement" defaultstate="collapsed"> -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${junit.jupiter.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.dvbern.oss.commons-i18n-l10n</groupId>
+				<artifactId>dvb-commons-i18n-l10n-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.30</version>
+			</dependency>
+			<dependency>
+				<groupId>org.checkerframework</groupId>
+				<artifactId>checker-qual</artifactId>
+				<version>3.42.0</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-annotations</artifactId>
+				<version>4.8.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>74.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito-junit-jupiter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-junit-jupiter</artifactId>
+				<version>${mockito-junit-jupiter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>3.24.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- </editor-fold> -->
+
+	<build>
+		<plugins>
+			<!-- <editor-fold desc="maven-checkstyle-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="maven-pmd-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="spotbugs-maven-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="jandex-maven-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>org.jboss.jandex</groupId>
+				<artifactId>jandex-maven-plugin</artifactId>
+				<version>1.2.3</version>
+				<executions>
+					<execution>
+						<id>make-index</id>
+						<goals>
+							<goal>jandex</goal>
+						</goals>
+						<!-- phase is 'process-classes by default' -->
+					</execution>
+				</executions>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="jacoco-maven-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<configuration>
+					<excludes>
+						<exclude>com/baeldung/**/ExcludedPOJO.class</exclude>
+						<exclude>com/baeldung/**/*DTO.*</exclude>
+						<exclude>**/config/*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>jacoco-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-site</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>check-coverage</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>INSTRUCTION</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>1</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="maven-javadoc-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<doclint>all,-missing</doclint>
+				</configuration>
+			</plugin>
+			<!-- </editor-fold> -->
+
+			<!-- <editor-fold desc="jgitflow-maven-plugin" defaultstate="collapsed"> -->
+			<plugin>
+				<groupId>ch.dvbern.oss.maven.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<configuration>
+					<flowInitContext>
+						<masterBranchName>main</masterBranchName>
+						<developBranchName>develop</developBranchName>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<versionTagPrefix>v</versionTagPrefix>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+			<!-- </editor-fold> -->
+		</plugins>
+	</build>
+
+	<!-- <editor-fold desc="distributionManagement" defaultstate="collapsed"> -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<!-- </editor-fold> -->
+
+	<profiles>
+		<!-- <editor-fold desc="maven-central" defaultstate="collapsed"> -->
+		<profile>
+			<id>maven-central</id>
+			<properties>
+				<skip-javadoc/>
+			</properties>
+			<build>
+				<plugins>
+					<!-- <editor-fold desc=" maven-gpg-plugin " defaultstate="collapsed"> -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<configuration>
+							<!-- Prevent gpg from using pinentry programs -->
+							<gpgArguments>
+								<arg>--pinentry-mode</arg>
+								<arg>loopback</arg>
+							</gpgArguments>
+						</configuration>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- </editor-fold> -->
+
+					<!-- <editor-fold desc="exus-staging-maven-plugin" defaultstate="collapsed"> -->
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<configuration>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						</configuration>
+					</plugin>
+					<!-- </editor-fold> -->
+				</plugins>
+			</build>
+		</profile>
+		<!-- </editor-fold> -->
+	</profiles>
+</project>
