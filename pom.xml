@@ -40,6 +40,9 @@
 		<!-- ! keep in sync with .mvn/maven-wrapper.properties ! -->
 		<maven-enforcer-plugin.requireMavenVersion.version>[3.9.5,)</maven-enforcer-plugin.requireMavenVersion.version>
 		<maven-enforcer-plugin.requireJavaVersion.version>${maven-compiler-plugin.javaversion}</maven-enforcer-plugin.requireJavaVersion.version>
+
+		<!-- this will get modified by jacoco -->
+		<surefire.argLine/>
 	</properties>
 	<!-- </editor-fold> -->
 
@@ -161,6 +164,14 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>@{surefire.argLine}</argLine>
+				</configuration>
+			</plugin>
+
 			<!-- <editor-fold desc="maven-checkstyle-plugin" defaultstate="collapsed"> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -204,13 +215,6 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco-maven-plugin.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>com/baeldung/**/ExcludedPOJO.class</exclude>
-						<exclude>com/baeldung/**/*DTO.*</exclude>
-						<exclude>**/config/*</exclude>
-					</excludes>
-				</configuration>
 				<executions>
 					<execution>
 						<id>jacoco-initialize</id>
