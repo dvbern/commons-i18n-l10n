@@ -8,24 +8,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DefaultTLImplTest {
+class DefaultTLStrategyTest {
 
-	private static final String TESTING_BUNDLE_NAME = DefaultTLImplTest.class.getName();
+	private static final String TESTING_BUNDLE_NAME = DefaultTLStrategyTest.class.getName();
 
 	private final AppLanguage de = new AppLanguageDTO(ULocale.GERMANY);
 	private final AppLanguage fr = new AppLanguageDTO(ULocale.FRANCE);
 	private final ResourceBundle bundle = ResourceBundle.getBundle(TESTING_BUNDLE_NAME, de.javaLocale());
-	private final DefaultTLImpl tl = new DefaultTLImpl(de, bundle);
+	private final DefaultTLStrategy tl = DefaultTLStrategy.createDefault(bundle, de);
 
 	@Test
 	void sanity_check_bundle() {
-
 		assertThat(bundle.getString("hello.world"))
 				.isEqualTo("Hallo Welt");
 	}
 
 	@Test
-	void check_bundle_loading_works_for_differing_AppLanguage() {
+	void sanity_check_bundle_loading_works_for_differing_AppLanguage() {
 		var bundleFR = ResourceBundle.getBundle(TESTING_BUNDLE_NAME, fr.javaLocale());
 
 		assertThat(bundleFR.getString("hello.world"))
@@ -73,5 +72,24 @@ class DefaultTLImplTest {
 			assertThat(tl.translate(I18nMessage.of("not.found", "arg1", "foo", "arg2", "bar")))
 					.isEqualTo("!not.found[arg1=foo, arg2=bar]!");
 		}
+	}
+
+	@Nested
+	class custom_formatter_factory {
+		private final DefaultTLStrategy customFactory = DefaultTLStrategy.create(
+				bundle,
+				de,
+				(message, language, bundle) ->
+						args -> "%s, {%s}".formatted(message.key().toString(), Helpers.prettyPrintMap(args))
+		);
+
+		@Test
+		void calls_the_custom_formatter() {
+			var actual = customFactory.translate(I18nMessage.of("hello.world", "foo", "bar"));
+
+			assertThat(actual)
+					.isEqualTo("hello.world, {foo=bar}");
+		}
+
 	}
 }
