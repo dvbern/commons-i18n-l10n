@@ -8,7 +8,11 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 @SuppressWarnings("HideUtilityClassConstructor")
-class Helpers {
+class DebugHelpers {
+
+	/**
+	 * Not every Map implementation has a nice toString() :(
+	 */
 	static String prettyPrintMap(Map<String, Serializable> args) {
 		return args.entrySet().stream()
 				.sorted(Map.Entry.comparingByKey())

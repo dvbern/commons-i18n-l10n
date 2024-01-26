@@ -1,25 +1,18 @@
 package ch.dvbern.oss.commons.i18nl10n;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import lombok.experimental.Accessors;
+public record I18nMessage(
+		I18nKey key,
+		Map<String, Serializable> args
+) {
 
-@Value
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-// mimic record behavior
-@Accessors(fluent = true)
-public class I18nMessage implements Serializable {
-
-	@Serial
-	private static final long serialVersionUID = 361831326473156615L;
-
-	private final I18nKey key;
-	private final Map<String, Serializable> args;
+	public I18nMessage(I18nKey key, Map<String, Serializable> args) {
+		this.key = Objects.requireNonNull(key);
+		this.args = Map.copyOf(Objects.requireNonNull(args));
+	}
 
 	public static I18nMessage of(
 			I18nKey key,
