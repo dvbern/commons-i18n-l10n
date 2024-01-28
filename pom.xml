@@ -10,7 +10,7 @@
 
 	<groupId>ch.dvbern.oss.commons-i18n-l10n</groupId>
 	<artifactId>dvb-commons-i18n-l10n-parent</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
