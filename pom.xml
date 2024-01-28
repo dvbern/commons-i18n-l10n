@@ -10,7 +10,7 @@
 
 	<groupId>ch.dvbern.oss.commons-i18n-l10n</groupId>
 	<artifactId>dvb-commons-i18n-l10n-parent</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
@@ -162,6 +162,7 @@
 
 	<build>
 		<plugins>
+			<!-- <editor-fold desc="maven-surefire-plugin" defaultstate="collapsed"> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -169,6 +170,7 @@
 					<argLine>@{surefire.argLine}</argLine>
 				</configuration>
 			</plugin>
+			<!-- </editor-fold> -->
 
 			<!-- <editor-fold desc="maven-checkstyle-plugin" defaultstate="collapsed"> -->
 			<plugin>

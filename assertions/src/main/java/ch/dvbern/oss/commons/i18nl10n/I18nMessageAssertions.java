@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.assertj.core.api.AbstractAssert;
@@ -13,7 +14,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 @SuppressWarnings({ "NonBooleanMethodNameMayNotStartWithQuestion", "unused" })
 public class I18nMessageAssertions extends AbstractAssert<I18nMessageAssertions, I18nMessage> {
-	private @Nullable TLFactory tlFactory;
+	private @Nullable Function<AppLanguage, Translator> translatorFactory;
 	private final Set<AppLanguage> translatedLanguages = new HashSet<>();
 
 	protected I18nMessageAssertions(I18nMessage message) {
@@ -158,8 +159,10 @@ public class I18nMessageAssertions extends AbstractAssert<I18nMessageAssertions,
 		return hasArgs(Map.of(a1, v1, a2, v2, a3, v3, a4, v4, a5, v5));
 	}
 
-	public I18nMessageAssertions usingTLFactory(TLFactory tlFactory) {
-		this.tlFactory = tlFactory;
+	public I18nMessageAssertions usingTranslatorFactory(
+			Function<AppLanguage, Translator> translatorFactory
+	) {
+		this.translatorFactory = translatorFactory;
 
 		return this;
 	}
@@ -177,7 +180,9 @@ public class I18nMessageAssertions extends AbstractAssert<I18nMessageAssertions,
 			failWithActualExpectedAndMessage(
 					translation,
 					expected,
-					"The translation differs from the expected text"
+					"The translation differs from the expected text for language %s/%s",
+					language,
+					language.locale()
 			);
 		}
 
@@ -207,12 +212,12 @@ public class I18nMessageAssertions extends AbstractAssert<I18nMessageAssertions,
 		return hasAllLanguagesTranslated(Set.of(requiredLanguages));
 	}
 
-	private TL fromFactory(AppLanguage language) {
+	private Translator fromFactory(AppLanguage language) {
 		isNotNull();
-		if (tlFactory == null) {
+		if (translatorFactory == null) {
 			throw failure("tlFactory has not been wet");
 		}
-		return tlFactory.forAppLanguage(language);
+		return translatorFactory.apply(language);
 	}
 
 	private static String prettyPrintMap(Map<String, Serializable> args) {

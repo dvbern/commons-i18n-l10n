@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 import com.ibm.icu.text.MessageFormat;
 import lombok.AccessLevel;
@@ -13,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class DefaultTLStrategy extends AbstractTL {
-	private static final Logger LOG = LoggerFactory.getLogger(DefaultTLStrategy.class);
+public class DefaultTranslatorStrategy implements Translator {
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultTranslatorStrategy.class);
 
 	@FunctionalInterface
 	public interface FormatterFactory {
@@ -42,19 +43,30 @@ public class DefaultTLStrategy extends AbstractTL {
 				)::format;
 	}
 
-	public static DefaultTLStrategy create(
-			ResourceBundle bundle,
+	public static DefaultTranslatorStrategy create(
 			AppLanguage appLanguage,
+			Function<AppLanguage, ResourceBundle> bundleLoader,
 			FormatterFactory formatterFactory
 	) {
-		return new DefaultTLStrategy(bundle, appLanguage, formatterFactory);
+		var bundle = bundleLoader.apply(appLanguage);
+		return new DefaultTranslatorStrategy(bundle, appLanguage, formatterFactory);
 	}
 
-	public static DefaultTLStrategy createDefault(
-			ResourceBundle bundle,
-			AppLanguage appLanguage
+	public static DefaultTranslatorStrategy createDefault(
+			AppLanguage appLanguage,
+			Function<AppLanguage, ResourceBundle> bundleLoader
 	) {
-		return create(bundle, appLanguage, defaultMessageFormatFactory());
+		return create(appLanguage, bundleLoader, defaultMessageFormatFactory());
+	}
+
+	public static DefaultTranslatorStrategy createDefault(
+			AppLanguage appLanguage,
+			String bundleBaseName
+	) {
+		Function<AppLanguage, ResourceBundle> bundleLoader =
+				language -> ResourceBundle.getBundle(bundleBaseName, language.javaLocale());
+
+		return createDefault(appLanguage, bundleLoader);
 	}
 
 	@Override
@@ -66,10 +78,9 @@ public class DefaultTLStrategy extends AbstractTL {
 			return result;
 		} catch (MissingResourceException ignored) {
 			LOG.warn("Translation not found for key/locale: {}/{}", message.key(), appLanguage);
-			var result = "!%s[%s]!".formatted(message.key().toString(), Helpers.prettyPrintMap(message.args()));
+			var result = "!%s[%s]!".formatted(message.key().toString(), DebugHelpers.prettyPrintMap(message.args()));
 
 			return result;
 		}
 	}
-
 }

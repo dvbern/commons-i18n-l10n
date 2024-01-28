@@ -1,6 +1,8 @@
 package ch.dvbern.oss.commons.i18nl10n;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -77,6 +79,22 @@ class I18NMessageTest {
 
 	@Nested
 	class factories_with_args {
+		@Test
+		void asserts_that_the_constructor_makes_a_copy_of_the_args_map() {
+			Map<String, Serializable> args = new HashMap<>(Map.of("a", "b"));
+			var originalArgs = Map.copyOf(args);
+
+			var message = new I18nMessage(I18nKey.of("key"), args);
+
+			assertThat(message.args())
+					.containsExactlyEntriesOf(args);
+
+			args.put("modified", "true");
+
+			assertThat(message.args())
+					.containsExactlyEntriesOf(originalArgs);
+		}
+
 		@Test
 		void message_with_1_argument_returns_an_instance_with_no_arguments() {
 			var actual = I18nMessage.of("key", "a1", "v1");
