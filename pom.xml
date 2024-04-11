@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -14,7 +16,7 @@
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
-	<!-- * ./mvnw -B jgitflow:release-start jgitflow:release-finish                          * -->
+	<!-- * ./mvnw -U -B jgitflow:release-start jgitflow:release-finish                       * -->
 	<!-- * Then check that everything is pushed                                              * -->
 	<!-- * and start the github action on branch "main":                                     * -->
 	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml * -->
@@ -40,7 +42,7 @@
 		<maven-enforcer-plugin.requireJavaVersion.version>${maven-compiler-plugin.javaversion}</maven-enforcer-plugin.requireJavaVersion.version>
 
 		<!-- this will get modified by jacoco -->
-		<surefire.argLine />
+		<surefire.argLine/>
 	</properties>
 	<!-- </editor-fold> -->
 
@@ -302,7 +304,7 @@
 		<profile>
 			<id>maven-central</id>
 			<properties>
-				<skip-javadoc />
+				<skip-javadoc/>
 			</properties>
 			<build>
 				<plugins>
