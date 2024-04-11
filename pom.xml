@@ -10,11 +10,11 @@
 
 	<groupId>ch.dvbern.oss.commons-i18n-l10n</groupId>
 	<artifactId>dvb-commons-i18n-l10n-parent</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
-	<!-- * ./mvnw -B jgitflow:release-start jgitflow:release-finish                          * -->
+	<!-- * ./mvnw -U -B jgitflow:release-start jgitflow:release-finish                       * -->
 	<!-- * Then check that everything is pushed                                              * -->
 	<!-- * and start the github action on branch "main":                                     * -->
 	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml * -->

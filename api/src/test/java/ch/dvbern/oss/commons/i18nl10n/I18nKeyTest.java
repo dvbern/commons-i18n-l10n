@@ -1,5 +1,8 @@
 package ch.dvbern.oss.commons.i18nl10n;
 
+import java.io.Serializable;
+
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -80,6 +83,15 @@ class I18nKeyTest {
 
 		assertThat(actual)
 				.hasToString(expected);
+	}
+
+	@Nested
+	class Serializability {
+		@Test
+		void implements_Serializable() {
+			assertThat(I18nKey.class)
+					.isAssignableTo(Serializable.class);
+		}
 	}
 
 }

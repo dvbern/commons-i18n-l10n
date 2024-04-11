@@ -172,4 +172,12 @@ class I18NMessageTest {
 
 	}
 
+	@Nested
+	class Serializability {
+		@Test
+		void implements_Serializable() {
+			assertThat(I18nMessage.class)
+					.isAssignableTo(Serializable.class);
+		}
+	}
 }
