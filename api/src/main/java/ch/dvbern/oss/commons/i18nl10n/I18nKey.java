@@ -1,5 +1,7 @@
 package ch.dvbern.oss.commons.i18nl10n;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -10,12 +12,16 @@ import java.util.regex.Pattern;
  */
 public record I18nKey(
 		String value
-) {
+) implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1L;
+
 	@SuppressWarnings("java:S5998")
 	private static final Pattern PATH_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_-]*(\\.[a-zA-Z0-9_-]+)*$");
 
-	public I18nKey(String value) {
-		this.value = validate(value);
+	public I18nKey {
+		value = validate(value);
 	}
 
 	public static I18nKey of(String path) {

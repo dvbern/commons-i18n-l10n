@@ -1,5 +1,6 @@
 package ch.dvbern.oss.commons.i18nl10n;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
@@ -7,11 +8,14 @@ import java.util.Objects;
 public record I18nMessage(
 		I18nKey key,
 		Map<String, Serializable> args
-) {
+) implements Serializable {
 
-	public I18nMessage(I18nKey key, Map<String, Serializable> args) {
-		this.key = Objects.requireNonNull(key);
-		this.args = Map.copyOf(Objects.requireNonNull(args));
+	@Serial
+	private static final long serialVersionUID = 1L;
+
+	public I18nMessage {
+		Objects.requireNonNull(key);
+		args = Map.copyOf(Objects.requireNonNull(args));
 	}
 
 	public static I18nMessage of(
