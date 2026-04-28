@@ -1,8 +1,6 @@
 # Local environment
 developer-local-settings
 .env
-# https://asdf.vm
-.tool-versions
 
 # Java
 .attach_pid*
