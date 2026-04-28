@@ -16,7 +16,7 @@
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
-	<!-- * Set version to x.y.z and create version-tag with prefix "v" (e.g. "v1.2.3")       * -->
+	<!-- * run `./release.sh -p`                                                               * -->
 	<!-- * Then check that everything is pushed                                              * -->
 	<!-- * and start the github action on branch "main":                                     * -->
 	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml   * -->
@@ -119,9 +119,9 @@
 				<version>1.18.46</version>
 			</dependency>
 			<dependency>
-				<groupId>org.checkerframework</groupId>
-				<artifactId>checker-qual</artifactId>
-				<version>4.0.0</version>
+				<groupId>org.jspecify</groupId>
+				<artifactId>jspecify</artifactId>
+				<version>1.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.spotbugs</groupId>
