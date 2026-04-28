@@ -16,7 +16,7 @@
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
-	<!-- * ./mvnw -U -B jgitflow:release-start jgitflow:release-finish                       * -->
+	<!-- * Set version to x.y.z and create version-tag with prefix "v" (e.g. "v1.2.3")       * -->
 	<!-- * Then check that everything is pushed                                              * -->
 	<!-- * and start the github action on branch "main":                                     * -->
 	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml   * -->
@@ -272,19 +272,36 @@
 			</plugin>
 			<!-- </editor-fold> -->
 
-			<!-- <editor-fold desc="jgitflow-maven-plugin" defaultstate="collapsed"> -->
+			<!-- <editor-fold desc="versions-maven-plugin" defaultstate="collapsed"> -->
 			<plugin>
-				<groupId>ch.dvbern.oss.maven.jgitflow</groupId>
-				<artifactId>jgitflow-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.21.0</version>
 				<configuration>
-					<flowInitContext>
-						<masterBranchName>main</masterBranchName>
-						<developBranchName>develop</developBranchName>
-						<featureBranchPrefix>feature/</featureBranchPrefix>
-						<releaseBranchPrefix>release/</releaseBranchPrefix>
-						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
-						<versionTagPrefix>v</versionTagPrefix>
-					</flowInitContext>
+					<ruleSet>
+						<ignoreVersions>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*RC.*</version>
+							</ignoreVersion>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*alpha.*</version>
+							</ignoreVersion>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*beta.*</version>
+							</ignoreVersion>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*redhat.*</version>
+							</ignoreVersion>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*-M\d+</version>
+							</ignoreVersion>
+						</ignoreVersions>
+					</ruleSet>
 				</configuration>
 			</plugin>
 			<!-- </editor-fold> -->
