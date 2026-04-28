@@ -355,7 +355,7 @@
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
 						<configuration>
-							<nexusUrl>https://ossrh-staging-api.central.sonatype.com/service/local</nexusUrl>
+							<nexusUrl>https://ossrh-staging-api.central.sonatype.com</nexusUrl>
 						</configuration>
 					</plugin>
 					<!-- </editor-fold> -->
