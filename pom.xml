@@ -24,21 +24,22 @@
 
 	<!-- <editor-fold desc="properties" defaultstate="collapsed"> -->
 	<properties>
-		<slf4j.version>2.0.11</slf4j.version>
+		<slf4j.version>2.0.17</slf4j.version>
 		<spotbugs-annotations.version>4.8.3</spotbugs-annotations.version>
-		<junit.jupiter.version>5.10.0</junit.jupiter.version>
-		<mockito-junit-jupiter.version>5.7.0</mockito-junit-jupiter.version>
+		<junit.jupiter.version>6.0.3</junit.jupiter.version>
+		<mockito-junit-jupiter.version>5.23.0</mockito-junit-jupiter.version>
 
-		<spotbugs-maven-plugin.version>4.8.1.0</spotbugs-maven-plugin.version>
-		<maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
-		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
-		<maven-checkstyle.version>10.12.7</maven-checkstyle.version>
-		<maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
-		<maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+		<spotbugs-maven-plugin.version>4.9.8.3</spotbugs-maven-plugin.version>
+		<maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+		<!-- See https://checkstyle.sourceforge.io/ for java version compatibility -->
+		<maven-checkstyle.version>12.3.1</maven-checkstyle.version>
+		<maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+		<jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
+		<maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 
 		<!-- ! keep in sync with .mvn/maven-wrapper.properties ! -->
-		<maven-enforcer-plugin.requireMavenVersion.version>[3.9.5,)</maven-enforcer-plugin.requireMavenVersion.version>
+		<maven-enforcer-plugin.requireMavenVersion.version>[3.9.15]</maven-enforcer-plugin.requireMavenVersion.version>
 		<maven-enforcer-plugin.requireJavaVersion.version>${maven-compiler-plugin.javaversion}</maven-enforcer-plugin.requireJavaVersion.version>
 
 		<!-- this will get modified by jacoco -->
@@ -115,17 +116,17 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.30</version>
+				<version>1.18.46</version>
 			</dependency>
 			<dependency>
 				<groupId>org.checkerframework</groupId>
 				<artifactId>checker-qual</artifactId>
-				<version>3.42.0</version>
+				<version>4.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>com.github.spotbugs</groupId>
 				<artifactId>spotbugs-annotations</artifactId>
-				<version>4.8.3</version>
+				<version>4.9.8</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -140,7 +141,7 @@
 			<dependency>
 				<groupId>com.ibm.icu</groupId>
 				<artifactId>icu4j</artifactId>
-				<version>74.2</version>
+				<version>78.3</version>
 			</dependency>
 
 			<dependency>
@@ -156,7 +157,7 @@
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
-				<version>3.24.2</version>
+				<version>3.27.7</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
