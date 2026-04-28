@@ -308,15 +308,6 @@
 		</plugins>
 	</build>
 
-	<!-- <editor-fold desc="distributionManagement" defaultstate="collapsed"> -->
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<!-- </editor-fold> -->
-
 	<profiles>
 		<!-- <editor-fold desc="maven-central" defaultstate="collapsed"> -->
 		<profile>
