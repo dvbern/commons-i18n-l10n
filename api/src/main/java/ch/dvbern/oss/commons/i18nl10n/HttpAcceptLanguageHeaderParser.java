@@ -9,7 +9,7 @@ import com.ibm.icu.util.ULocale;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import static java.util.function.Function.identity;
 

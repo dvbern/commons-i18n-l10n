@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.assertj.core.api.AbstractAssert;
-import org.checkerframework.checker.nullness.qual.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings({ "NonBooleanMethodNameMayNotStartWithQuestion", "unused" })
 public class I18nMessageAssertions extends AbstractAssert<I18nMessageAssertions, I18nMessage> {
