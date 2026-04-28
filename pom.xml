@@ -348,7 +348,7 @@
 						<version>0.10.0</version>
 						<extensions>true</extensions>
 						<configuration>
-							<publishingServerId>sonatype-central</publishingServerId>
+							<publishingServerId>ossrh</publishingServerId>
 							<autoPublish>true</autoPublish>
 							<waitUntil>published</waitUntil>
 						</configuration>
