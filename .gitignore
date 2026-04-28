@@ -1,6 +1,7 @@
 # Local environment
 developer-local-settings
 .env
+.envrc
 
 # Java
 .attach_pid*
