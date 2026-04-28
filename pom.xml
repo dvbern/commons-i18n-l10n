@@ -16,9 +16,9 @@
 	<packaging>pom</packaging>
 
 	<!-- *********************** Release HowTo *********************************************** -->
-	<!-- * run `./release.sh -p`                                                               * -->
+	<!-- * run `./release.sh -p`                                                             * -->
 	<!-- * Then check that everything is pushed                                              * -->
-	<!-- * and start the github action on branch "main":                                     * -->
+	<!-- * and start the github action ***on the newly created version tag***                * -->
 	<!-- * https://github.com/dvbern/commons-i18n-l10n/actions/workflows/maven-publish.yml   * -->
 	<!-- ************************************************************************************* -->
 
