@@ -39,7 +39,6 @@ fi
 
 echo "Remove SNAPSHOT from version" >&2
 ./mvnw versions:set -DremoveSnapshot=true
-./mvnw clean initialize -pl m_evok-evokwf-angular
 version=$(print_project_version)
 commit "Set release version to: ${version}"
 
@@ -49,7 +48,6 @@ git tag "${version_tag}"
 
 echo "Set next SNAPSHOT version" >&2
 ./mvnw versions:set -DnextSnapshot=true
-./mvnw clean initialize -pl m_evok-evokwf-angular
 snapshot_version=$(print_project_version)
 commit "Set next SNAPSHOT version: ${snapshot_version}"
 
